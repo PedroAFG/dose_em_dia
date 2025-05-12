@@ -21,7 +21,7 @@ public class UsuarioController : ControllerBase
         _envioEmail = envioEmail;
     }
 
-    [HttpPost("criar")] 
+    [HttpPost("criar")]
     public async Task<IActionResult> CriarUsuario([FromBody] Usuario request)
     {
         try
@@ -38,7 +38,7 @@ public class UsuarioController : ControllerBase
                 request.Endereco.Pais
             );
 
-            _context.Endereco.Add( endereco );
+            _context.Endereco.Add(endereco);
 
             var salt = CriptografiaHelper.GerarSalt();
 
@@ -244,14 +244,14 @@ public class UsuarioController : ControllerBase
         };
 
         var fabricantes = new[] { "Pfizer", "Butantan", "MSD", "Fiocruz", "AstraZeneca", "GSK", "Moderna" };
-        var nomesSorteio = listaVacinas.Keys.ToList();
+        var vacinaAleatoria = listaVacinas.Keys.ToList();
         var rand = new Random();
         var vacinas = new List<Vacina>();
 
-        // Geração das vacinas aplicadas
+        // Geração das vacinas em dia
         for (int i = 0; i < 10; i++)
         {
-            var nome = nomesSorteio[rand.Next(nomesSorteio.Count)];
+            var nome = vacinaAleatoria[rand.Next(vacinaAleatoria.Count)];
             vacinas.Add(new Vacina(
                 nome,
                 fabricantes[rand.Next(fabricantes.Length)],
@@ -268,7 +268,7 @@ public class UsuarioController : ControllerBase
         // Geração das vacinas em atraso
         for (int i = 0; i < 5; i++)
         {
-            var nome = nomesSorteio[rand.Next(nomesSorteio.Count)];
+            var nome = vacinaAleatoria[rand.Next(vacinaAleatoria.Count)];
             vacinas.Add(new Vacina(
                 nome,
                 fabricantes[rand.Next(fabricantes.Length)],
@@ -285,7 +285,7 @@ public class UsuarioController : ControllerBase
         // Geração das vacinas a vencer
         for (int i = 0; i < 4; i++)
         {
-            var nome = nomesSorteio[rand.Next(nomesSorteio.Count)];
+            var nome = vacinaAleatoria[rand.Next(vacinaAleatoria.Count)];
             vacinas.Add(new Vacina(
                 nome,
                 fabricantes[rand.Next(fabricantes.Length)],
